@@ -26,6 +26,14 @@ Algorithms:
 - 
 
 
+What works:
+
+- The context of light turning on and off is working proper.
+- The localization is pretty random. The initial tests on the x and y should be smoothed out. But i didn't see much improvement. May it needs more tweaking with different encoders. Should check if swarming is useful for that. 
+
+
+Notes for users:
+
 I started this as a hobby project. I do not guarantee that this works for you. I only guarantee that i will help you if you have questions. Its in a inital stage and everthing is patch work than disciplined approach. I was unware of Numenta contest and it was too late when i came to know about it. Everything i did was in hurry. I tried to submit it as NUPIC hackathon project but unfortunately i missed it. That would have been major driving force to finish this if i had known before. I will still try to finish this in case it could help me get a job. I cannot guarantee on the working though. Because everything is experimental. Theoretically it should work. 
 
 
@@ -56,4 +64,9 @@ Network....low level....opf....
 
 
 Code contains samples from NUMENTA's NUPIC opensource HTM framework.
+
+
+Next phases:
+
+There is a great chance that the localization of peripheral devices is inverse logic. Should tinker about it and work on it once the above works. 
 
