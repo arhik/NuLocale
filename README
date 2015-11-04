@@ -1,22 +1,54 @@
-Hello every one. I am a big fan of numenta team and numenta technology. I am here to explain the basic plan of my project.
+Hello every one. I am a big fan of numenta team and numenta HTM technology. This project is based on nupic-opensource HTM framework. 
 
-Imagine if we could somehow localize a person with in a room, observe his moves and make a prediction about his intention. If user turns-on the light immediately after entering a room and if we could capture the context of user entering the room and doesnt switch on the light then detect such anamolies notify and ask if it should be switched on. Notifying when eaving the room without switching on the light should equally work well. Idea is simple but technically image processing should suffice for such task (with privacy, consumption and computation requirements as definite concerns). Basic IR range detection works too. But with increasing complexity in context basic thresholding logic is bad. Implememting fuzzy, ANN turns complex with complexity. On the other hand those approaches do not consider memory(history) sequences in such tasks. Nupic does that well. Nupic is good at observing coincidences too(From HTM micro circuits / Maths behind HTM paper by Hawkins and George). The current framework of NUPIC is enough for such application development if we could tap well its capabilities. But all this works given the assumption that we could somehow localize the person in a room and observe his cordinates.
+Idea:
 
-
-There is a way to localize the person using wireless sensor networks in a cost efficient way. But with recent Bluetooth LE technology cost and energy efficiency is met with a radius of 30-60 meters connectivity range (could be Visibility rather connectivity not sure). Meaning that its best suited for Indoor localiztion. Indoor localization using wireless networks is a big challenge. Use signal strength alone and predict the location of person wearing an electronic device which supports some wireless protocol.
-The signal strength values are quite erratic in nature. Its not just random it depends on environments. If environment is dynamic too then the rssi values we get are not trust worthy. Predicting the rssi values helps us to filter outlier values. Since nupic is good at detecting the coincidences, the coincidence of this rssi value at this location is I chose light blue bean as the the ble. I detect four of these of device with in a room (while only three is enough, i prefer four for reliability and precision).
-I strongly feel we can tap that with we could have in memory hierarchy.
-
-I used my surface pro 3 accelerometer and magnetometer sensors for additional context (accelerometer - to judge if i am walking, magn3d - for magnetic north compass direction context) more conincidences might lead to additional information and coincidences.
-My coordinates change only when i walk. My walk is judge based on accelerometer. The anomaly for the walk is when i dont walk is used instead (since thats equally a good negation context) . The magnetic compass plays two roles. The direction helps but more than that the our own physical body could affect rssi values (that could be great factor as far as i know)
-
-I 
+Imagine if we could somehow localize a person with in a room, observe his moves and make a prediction about his intention then we can develop wide variety of applications. For instance if user turns-on the light as a daily routine after entering a room and if we could capture the capture the anomaly context of not turning on the light we could develop an app to notify and ask if it should be switched on. Notifying when leaving the room without turning off the light should equally work well. Idea is simple but technically there are many approaches to solve this. This part explains 'why nupic ?'. Other ways include popular image processing for such tasks (with privacy, energy consumption and computation requirements as definite concerns). Basic IR range detection works too, but with increasing context complexity basic thresholding logic is bad. Implememting fuzzy, ANN turns complex with complexity again. Moreover hand those approaches do not consider memory(history) sequences in such tasks. Nupic does that well. Nupic is good at observing coincidences too(From HTM micro circuits / Maths behind HTM paper by Hawkins and George). The current framework of NUPIC is enough for such application development if we could tap well its capabilities. But all this works given the assumption that we could somehow localize the person in a room and observe his cordinates.
 
 
-Reference.... hypothesis..feedback...
+Bluetooth LE technology is low cost and energy efficienct connectivity range of 30-60 meters radius (could be Visibility rather connectivity not sure) and lasts for one year on a 1.5 V button cell. Meaning that its best suited for Indoor localiztion. Indoor localization using wireless networks is a big challenge. Use signal strength alone we predict the location of person wearing an electronic device which supports some wireless protocol. But signal signal strength alone is proved to be inconsistent. Additional information is needed. The signal strength values are quite erratic in nature. Its not just random it depends on environments. If environment is dynamic too then the rssi values we get are not trust worthy. Predicting the rssi values helps us to filter outlier values. Since nupic is good at detecting the coincidences, the coincidence of this rssi values from multiple sensors could develop constraints and invariant factors and predict accurately. 
+
+Hardware:
+
+I chose light blue bean as the the ble-device. I detect four of these devices with in a room (while only three is enough, i prefer four for reliability and precision. I also believe in the fact more information better results).
+
+I used my surface pro 3 accelerometer and magnetometer sensors for additional context (accelerometer - to judge if i am walking, magn3d - for magnetic north compass direction context. As i said more conincidences might lead to additional information and coincidences help prediction but could be over kill. May be few of those is enough. Intensive research on these will help us understand best factors to consider.)
+My coordinates change only when i walk. My walk is judge based on accelerometer. The anomaly for the walk/No-wald is detected using negation logic i.e. 'when i dont walk' context is used instead (since thats equally a good negation context). The magnetic compass plays two roles. The direction of walk which helps but more than that the our own physical body could affect rssi values (that could be great factor as far as i know)
+
+Light blue beans will be in beacon mode (not sure if it can be called peripheral device from bluetooth context) and surface pro 3 will be a central device (surface comes with a bluetooth-LE module and could detect light blue bean devices)
+
+Approach:
+
+Video:
+
+Algorithms:
+
+- Convert the rssi values to distances based on power law.
+- 
 
 
-SMS.....
+I started this as a hobby project. I do not guarantee that this works for you. I only guarantee that i will help you if you have questions. Its in a inital stage and everthing is patch work than disciplined approach. I was unware of Numenta contest and it was too late when i came to know about it. Everything i did was in hurry. I tried to submit it as NUPIC hackathon project but unfortunately i missed it. That would have been major driving force to finish this if i had known before. I will still try to finish this in case it could help me get a job. I cannot guarantee on the working though. Because everything is experimental. Theoretically it should work. 
+
+
+Notes for myself:
+
+Lessons learnt: Keep track of contests around you. 
+
+Any ways this is not completely done yet but results were good to continue working on it. This could also solve my other NuParking project. I prefer Network API than opf. Bottom up approach helps me to understand nupic more. I dont really know how opf worked exactly but it worked. Network API should be explored more. Lower level details were clear in my head. 
+
+
+I hate it when i lose a chance to meet tinkerers:
+
+Campus is boring and making me loose fun. Double torture.
+
+Since i prefer Network API all the code will be moved to opf folder for reference. 
+
+Future plans:
+
+Tinkering
+Reference SDR .... hypothesis..feedback...
+
+
+free SMS.alert app works as a startup....
 
 
 
