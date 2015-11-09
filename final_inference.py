@@ -1,7 +1,7 @@
 import rospy
 import message_filters
 import pygame, sys
-from std_msgs.msg import String,Int64,Float64
+from std_msgs.msg import Float32, Float32MultiArray
 from geometry_msgs.msg import Vector3
 
 # pygame.init()
@@ -73,9 +73,9 @@ def callback3(data):
 def sensory_input_subscriber():
 	rospy.init_node("sensory_inference_input_subscriber",anonymous=True)
 
-	rospy.Subscriber("sensory_inference_stream_x", Float64, callback1)
-	rospy.Subscriber("sensory_inference_stream_y", Float64,callback2)
-	rospy.Subscriber("sensory_inference_stream_z", Float64,callback3)
+	rospy.Subscriber("sensory_inference_stream_x", Float32, callback1)
+	rospy.Subscriber("sensory_inference_stream_y", Float32,callback2)
+	rospy.Subscriber("sensory_inference_stream_z", Float32,callback3)
 	
 	# inf_x = message_filters.Subscriber("sensory_inference_stream_x",Float64)
 	# inf_y = message_filters.Subscriber("sensory_inference_stream_y", Float64)
@@ -87,6 +87,6 @@ def sensory_input_subscriber():
 
 
 if __name__=="__main__":
-	pub = rospy.Publisher("final_coordinates",Vector3, queue_size = 10)
+	pub = rospy.Publisher("final_coordinates",Float32MultiArray, queue_size = 10)
 	sensory_input_subscriber()
 
