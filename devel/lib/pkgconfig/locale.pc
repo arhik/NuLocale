@@ -1,0 +1,8 @@
+prefix=/home/karthik/git_repositories/NuLocale/devel
+
+Name: locale
+Description: Description of locale
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/karthik/git_repositories/NuLocale/devel/lib 
+Requires: 

@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "locale")
+set(locale_MAINTAINER "karthik <karthik@todo.todo>")
+set(locale_DEPRECATED "")
+set(locale_VERSION "0.0.0")
+set(locale_BUILD_DEPENDS )
+set(locale_RUN_DEPENDS )
+set(locale_BUILDTOOL_DEPENDS "catkin")

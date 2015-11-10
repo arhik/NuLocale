@@ -1,0 +1,2 @@
+locale
+-DCATKIN_DEVEL_PREFIX=/home/karthik/git_repositories/NuLocale/devel -DCMAKE_INSTALL_PREFIX=/home/karthik/git_repositories/NuLocale/install -G Unix Makefiles
