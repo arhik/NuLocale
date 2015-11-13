@@ -174,6 +174,9 @@ def parse_events(sock, loop_count=1):
                         ble_pkt["MAC_ADDRESS"] = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
                         ble_pkt["TX_POW"] = struct.unpack("b", pkt[report_pkt_offset -2])[0]
                         ble_pkt["RSSI"] = struct.unpack("b", pkt[report_pkt_offset -1])[0]
+                        ratio = float(ble_pkt["RSSI"])/float(ble_pkt["TX_POW"])
+                        distance = 0.89976*(ratio**7.7095 + 0.111)
+                        ble_pkt["Range"] = distance
                         ble_json_pkt = json.dumps(ble_pkt)
                         ble_pkt_set.add(ble_json_pkt)
                         print(ble_pkt_set)
