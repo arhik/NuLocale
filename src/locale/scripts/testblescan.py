@@ -1,3 +1,4 @@
+#!/usr/bin/env python 
 # test BLE Scanning software
 # jcs 6/8/2014
 
