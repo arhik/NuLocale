@@ -1,5 +1,6 @@
 <launch>
-
+  <env name="ROS_ROOT" value="/opt/ros/jade/share/ros"/>
+      <env name="ROS_PACKAGE_PATH" value="/home/karthik/python/ros/catkin_ws/src:/opt/ros/jade/share:/opt/ros/jade/stacks"/>
   <group ns="turtlesim1">
     <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
   </group>
@@ -14,6 +15,17 @@
     <remap from="output" to="turtlesim2/turtle1"/>
   </node>
 <group ns="turtlesim1">
+     <node pkg="locale" name="ble_publisher" type="ble_pub.py"> 
+     <!--<node pkg="locale" name="ble_publisher" type="ble_pub.py" launch-prefix="sudo -s -A"> --> 
+      <env name="SUDO_ASKPASS" value="/usr/bin/ssh-askpass"/>
+
+     <!-- </node> -->
+      <env name="ROS_ROOT" value="/opt/ros/jade/share/ros"/>
+      <env name="ROS_MASTER_URI" value="http://localhost:11311"/>
+      <env name="ROS_PACKAGE_PATH" value="/home/karthik/python/ros/catkin_ws/src:/opt/ros/jade/share:/opt/ros/jade/stacks"/>
+
+
+    </node>
     <node pkg="rqt_graph" name="rqt" type="rqt_graph"/>
     <node pkg="locale" name="turtle_cordinate" type="turtle_cordinate.py"/>
     <node pkg="locale" name="distance_theta" type="distance_theta.py" />
