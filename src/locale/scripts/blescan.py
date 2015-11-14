@@ -21,6 +21,9 @@ import sys
 import struct
 import bluetooth._bluetooth as bluez
 import json
+
+import collections
+from collections import OrderedDict
 LE_META_EVENT = 0x3e
 LE_PUBLIC_ADDRESS=0x00
 LE_RANDOM_ADDRESS=0x01
@@ -117,6 +120,7 @@ def parse_events(sock, loop_count=1):
     ble_pkt = dict()
     devices = set()
     ble_pkt_set = set()
+    ble_pkts_dict = dict()
     old_filter = sock.getsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, 14)
 
     # perform a device inquiry on bluetooth device #0
@@ -130,7 +134,8 @@ def parse_events(sock, loop_count=1):
     done = False
     results = []
     myFullList = []
-    while len(devices) < 2:
+    known_devices = ['5f:8d:35:cd:bc:da','d0:39:72:d3:4d:cf']
+    while len(ble_pkts_dict) < 2:
         pkt = sock.recv(127)
         print( "packet length is {0}".format(len(str(pkt))))
         # print struct.unpack("BBBBBBB", str(pkt))
@@ -158,35 +163,39 @@ def parse_events(sock, loop_count=1):
                 
                 
                 for i in range(0, num_reports):
+                    print("Current device detected:{0}".format(dev_mac))
                     if(DICT_SEND==True):
-                        print("------------DEVICE ADDED OR NOT----------------")
-                        if dev_mac not in devices:
-                            print("DEVICE ADDED : {0} ".format(dev_mac))
-                            devices.add(dev_mac)
-                            
-                        else:
-                            ble_pkt_set.remove(ble_json_pkt)
-                            print("DEVICE REMOVED")
-                        ble_pkt = dict()
-                        ble_pkt["UUID"] = returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
-                        ble_pkt["MAJOR"] = returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4])
-                        ble_pkt["MINOR"] = returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2])
-                        ble_pkt["MAC_ADDRESS"] = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
-                        ble_pkt["TX_POW"] = struct.unpack("b", pkt[report_pkt_offset -2])[0]
-                        ble_pkt["RSSI"] = struct.unpack("b", pkt[report_pkt_offset -1])[0]
-                        ratio = float(ble_pkt["RSSI"])/float(ble_pkt["TX_POW"])
-                        distance = 0.89976*(ratio**7.7095 + 0.111)
-                        ble_pkt["Range"] = distance
-                        ble_json_pkt = json.dumps(ble_pkt)
-                        ble_pkt_set.add(ble_json_pkt)
-                        print(ble_pkt_set)
+                        # print("------------DEVICE ADDED OR NOT----------------")
+                        if dev_mac in known_devices :
+                        #     if dev_mac not in devices and dev_mac in known_devices:
+                        #         print("DEVICE ADDED : {0} ".format(dev_mac))
+                        #         devices.add(dev_mac)
+                                
+                        #     else:
+                        #         ble_pkt_set.remove(ble_json_pkt)
+                        #         print("DEVICE REMOVED")
+                        # else :
+                        #     continue
+                            ble_pkt = dict()
+                            ble_pkt["UUID"] = returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
+                            ble_pkt["MAJOR"] = returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4])
+                            ble_pkt["MINOR"] = returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2])
+                            ble_pkt["MAC_ADDRESS"] = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
+                            ble_pkt["TX_POW"] = struct.unpack("b", pkt[report_pkt_offset -2])[0]
+                            ble_pkt["RSSI"] = struct.unpack("b", pkt[report_pkt_offset -1])[0]
+                            ratio = float(ble_pkt["RSSI"])/float(ble_pkt["TX_POW"])
+                            distance = 0.89976*(ratio**7.7095 + 0.111)
+                            ble_pkt["Range"] = distance
+                            ble_json_pkt = json.dumps(ble_pkt)
+                            ble_pkts_dict.update({ble_pkt["MAC_ADDRESS"]: ble_json_pkt})
+                            print(ble_pkts_dict)
                         
 
 		
 		    if (DEBUG == True):
 			print "-------------"
                     	#print "\tfullpacket: ", printpacket(pkt)
-		    	print "\tUDID: ", printpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
+		    	print "\tUUID: ", printpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
 		    	print "\tMAJOR: ", printpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4])
 		    	print "\tMINOR: ", printpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2])
                     	print "\tMAC address: ", packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
@@ -215,6 +224,6 @@ def parse_events(sock, loop_count=1):
     sock.setsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, old_filter )
     print(devices)
     print(ble_pkt_set)
-    return ble_pkt_set
+    return OrderedDict(sorted(ble_pkts_dict.items()))
 
 

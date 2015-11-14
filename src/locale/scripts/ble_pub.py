@@ -24,7 +24,6 @@ if __name__ == '__main__':
 	except:
 		print "error accessing bluetooth device..."
 	    	sys.exit(1)
-
 	blescan.hci_le_set_scan_parameters(sock)
 	blescan.hci_enable_le_scan(sock)
 	try:
@@ -33,12 +32,20 @@ if __name__ == '__main__':
 		
 		rate = rospy.Rate(10) # 10hz
 		while not rospy.is_shutdown():
-			ble_pkt_set = blescan.parse_events(sock, 4)
-			distances = []
-			for ble_json_pkt in ble_pkt_set:
-				ble_pkt = json.loads(ble_json_pkt)
-				UUID = ble_pkt.get("UUID", None)
-				distances.append(ble_pkt.get("Range",None))
+			ble_pkts_dict = blescan.parse_events(sock, 4)
+			print(ble_pkts_dict)
+			for mac_id, pkt in  ble_pkts_dict.items():
+				print(mac_id,pkt)
+				ble_pkt = json.loads(ble_pkts_dict[mac_id])
+				if(mac_id == 'd0:39:72:d3:4d:cf'):
+					
+					d1 = ble_pkt.get("Range",None)
+				else:
+					d2 = ble_pkt.get("Range",None)
+
+			print(d1,d2)
+
+			
 				# print UUID
 				# if UUID is not None:
 				# 	if UUID == "a495ff10c5b14b44b5121370f02d74de":
@@ -56,7 +63,7 @@ if __name__ == '__main__':
 				# 		print("I found phone : {0}".format(d2))
 				# 	else:
 				# 		print(ble_pkt)
-			t.data = distances
+			t.data = [d1,d2]
 			rospy.loginfo(t)
 			pub.publish(t)
 			rate.sleep()

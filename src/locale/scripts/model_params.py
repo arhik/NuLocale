@@ -48,7 +48,7 @@ MODEL_PARAMS = {
                     'name': u'd1',
                     'type': 'ScalarEncoder',
                     'minval': 0.0,
-                    'maxval': 12.0,
+                    'maxval': 32.0,
                     'w': 21
                 },
                 'd2': {
@@ -57,7 +57,7 @@ MODEL_PARAMS = {
                     'name': u'd2',
                     'type': 'ScalarEncoder',
                     'minval': 0.0,
-                    'maxval': 12.0,
+                    'maxval': 32.0,
                     'w': 21
                 },
                 'd3': {
@@ -66,7 +66,7 @@ MODEL_PARAMS = {
                     'name': u'd3',
                     'type': 'ScalarEncoder',
                     'minval': 0.0,
-                    'maxval': 12.0,
+                    'maxval': 32.0,
                     'w': 21
                 },
                 'd4': {
@@ -75,7 +75,7 @@ MODEL_PARAMS = {
                     'name': u'd4',
                     'type': 'ScalarEncoder',
                     'minval': 0.0,
-                    'maxval': 12.0,
+                    'maxval': 32.0,
                     'w': 21
                 }
             },
@@ -155,7 +155,7 @@ MODEL_PARAMS = {
             'columnCount': 2048,
 
             # The number of cells (i.e., states), allocated per column.
-            'cellsPerColumn': 32,
+            'cellsPerColumn': 2,
 
             'inputWidth': 2048,
 
@@ -381,7 +381,7 @@ LIGHTON_PARAMS = {
             'columnCount': 2048,
 
             # The number of cells (i.e., states), allocated per column.
-            'cellsPerColumn': 32,
+            'cellsPerColumn': 2,
 
             'inputWidth': 2048,
 
