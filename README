@@ -37,36 +37,5 @@ Notes for users:
 I started this as a hobby project. I do not guarantee that this works for you. I only guarantee that i will help you if you have questions. Its in a inital stage and everthing is patch work than disciplined approach. I was unware of Numenta contest and it was too late when i came to know about it. Everything i did was in hurry. I tried to submit it as NUPIC hackathon project but unfortunately i missed it. That would have been major driving force to finish this if i had known before. I will still try to finish this in case it could help me get a job. I cannot guarantee on the working though. Because everything is experimental. Theoretically it should work. 
 
 
-Notes for myself:
-
-Lessons learnt: Keep track of contests around you. 
-
-Any ways this is not completely done yet but results were good to continue working on it. This could also solve my other NuParking project. I prefer Network API than opf. Bottom up approach helps me to understand nupic more. I dont really know how opf worked exactly but it worked. Network API should be explored more. Lower level details were clear in my head. 
-
-
-I hate it when i lose a chance to meet tinkerers:
-
-Campus is boring and making me loose fun. Double torture.
-
 Since i prefer Network API all the code will be moved to opf folder for reference. 
-
-Future plans:
-
-Tinkering
-Reference SDR .... hypothesis..feedback...
-
-
-free SMS.alert app works as a startup....
-
-
-
-Network....low level....opf....
-
-
-Code contains samples from NUMENTA's NUPIC opensource HTM framework.
-
-
-Next phases:
-
-There is a great chance that the localization of peripheral devices is inverse logic. Should tinker about it and work on it once the above works. 
 
